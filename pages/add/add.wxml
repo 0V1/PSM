@@ -1,0 +1,85 @@
+<!--add.wxml-->
+<view class="main">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <view class="account">
+
+      <picker range="{{navItems}}" range-key="{{'name'}}" value="{{index}}" bindchange="bindTypeChange">
+        <view class="account-flex-icon">
+          <view class="picker">
+            所属分类: {{navItems[index].name}}
+          </view>
+          <button size="mini">选择</button>
+        </view>
+      </picker>
+    </view>
+
+    <view class="account">
+      <view>账号描述</view>
+      <view class="account-flex-icon">
+        <input class="input" auto-focus type="text" name="description" value="{{description}}" bindinput="setDescription" placeholder="163邮箱账号密码"/>
+        <icon type="clear" bindtap="clearDescription"/> 
+      </view>
+    </view>
+
+    <view class="account">
+      <view>账号</view>
+      <view class="account-flex-icon">
+        <input class="input" type="text" name="account" value="{{account}}" bindinput="setAccount" placeholder="xxxx@163.com"/>
+        <icon type="clear" bindtap="clearAccount"/> 
+      </view>
+    </view>
+
+    <!-- 生成密码-->
+    <view class="account">
+      生成密码
+      <switch bindchange="switchChange" checked="{{hasCreate}}"/>
+      
+      <view wx:if="{{hasCreate}}">
+        <view >使用字符
+          <checkbox-group bindchange="checkboxChange">
+            <!--这里用label显示内容，for循环写法 wx:for-items 默认item为每一项-->
+            <label style="display: flex;" wx:for-items="{{items}}">
+                <!--value值和默认选中状态都是通过数据绑定在js中的-->
+                <checkbox value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
+            </label>
+          </checkbox-group>
+        </view>
+
+        <view >密码长度
+          <input class="input" type="number" name="ps_len" value="{{ps_len}}" bindinput="setPs_len" placeholder="8"/>      
+        </view>
+      </view>
+    </view>
+    
+    <view class="account">
+      <view>
+        密码
+        <button wx:if="{{hasCreate}}" size="mini" bindtap="onRefresh">换一个</button>
+      </view>
+      <view class="account-flex-icon">
+        <input class="input" type="text" name="password" value="{{password}}" bindinput="setPassword" placeholder="请输入密码"/>
+        <icon type="clear" bindtap="clearPassword"/> 
+      </view>
+    </view>
+
+    <!-- 有效期限-->
+    <view class="account">有效期限
+      <switch bindchange="switchChange2" checked="{{hasTime}}"/>
+      <view wx:if="{{hasTime}}">
+        <view class="section">
+          <view class="section__title">日期选择</view>
+          <picker mode="date" value="{{valid_time}}" start="2015-09-01" end="2027-09-01" bindchange="bindDateChange">
+            <view class="picker">
+              当前选择: {{date}}
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <view class="bottom">
+      <button formType="reset">重置</button>
+      <button formType="submit" type="primary">提交</button>
+    </view>
+  </form>
+</view>

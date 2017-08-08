@@ -1,0 +1,46 @@
+<!--index.wxml-->
+
+<view class="main">
+  <button class="btn" bindtap="operation">
+    <image mode="aspectFit" class="image" src="../../../images/about/帮助.png"/>
+    使用说明
+  </button>
+  <button class="btn" bindtap="clear">
+    <image mode="aspectFit" class="image" src="../../../images/about/删除.png"/>
+    清空本地所有密码
+  </button>
+  <button class="btn" bindtap="exportALL">
+    <image mode="aspectFit" class="image" src="../../../images/about/下载.png"/>
+    导出本地所有密码
+  </button>
+  <button class="btn" bindtap="importALL">
+    <image mode="aspectFit" class="image" src="../../../images/about/上传.png"/>
+    导入密码到本地
+  </button>
+  <button class="btn" bindtap="about">
+    <image mode="aspectFit" class="image" src="../../../images/about/二维码.png"/>
+    关于钥匙串
+  </button>
+
+  <modal hidden="{{hidden_export}}" title="导出密码到本地" confirm-text="拷贝" cancel-text="取消" bindcancel="cancel" bindconfirm="copy">
+      <text>
+       {{content_export}}
+      </text>
+  </modal>  
+
+  <modal hidden="{{hidden_import}}" title="导入密码到本地" confirm-text="导入" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">
+      <input value='{{content_import}}' bindinput="setImport" placeholder="请输入要导入的内容"/>
+      <text>
+        格式：
+        {"1501729257234":
+        {"description":"1", 
+        "account":"2", 
+        "password":"3", 
+        "create_time":"2017-08-03 11:00:57", 
+        "update_time":"2017-08-03 11:00:57", 
+        "valid_time":"", 
+        "state":1}}
+      </text>
+  </modal>
+
+</view>

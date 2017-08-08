@@ -1,0 +1,27 @@
+<view wx:if="{{hasObject}}" class="main-account">{{reminder}}</view>
+<view wx:else class="main-account">
+      
+    <view wx:for="{{keyChains}}" wx:key="id" id="{{index}}" class="account-list" bindlongtap="onUpdate">
+      <view class="account-row">
+        <label class="account-left">类型：{{item.type}}</label>
+        <view class="account-right">
+          <icon id="{{index}}" type="cancel" class="account-right" size="23" bindtap="onDelete"/>
+        </view>
+      </view>
+
+      <view class="account-row">
+        <label class="account-left">账号描述：{{item.description}}</label>
+      </view>
+      
+      <view class="account-row">
+        <label class="account-left">账号：{{item.account}}</label>
+        <button id="{{index}}" class="account-right" bindtap="copy_account" size="mini">copy</button>
+      </view>
+
+      <view class="account-row">
+        <label class="account-left">密码：{{item.password}}</label>
+        <button id="{{index}}" class="account-right" bindtap="copy_password" size="mini">copy</button>
+      </view>
+    </view>
+      
+</view>

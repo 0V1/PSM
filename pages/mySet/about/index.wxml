@@ -1,0 +1,11 @@
+<!--index.wxml-->
+
+<view class="container">
+  <view>
+    欢迎使用钥匙串
+  </view>
+  <view class="userinfo">
+    <image class="userinfo-avatar" src="../../../images/about/my.png" background-size="cover"/>
+  </view>
+  
+</view>
