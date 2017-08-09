@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/lock/index",
     "pages/main/index",
+    "pages/lock/index",
     "pages/add/index",
     "pages/list/index",
     "pages/update/index",

@@ -1,0 +1,121 @@
+<!--add.wxml-->
+<view class="page">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{account_isNull && password_isNull}}">请输入账号密码</view>
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{account_isNull && !password_isNull}}">请输入账号</view>
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{!account_isNull && password_isNull}}">请输入密码</view>
+
+    <view class="weui-cells__title">修改密码管理</view>
+    <view class="weui-cells weui-cells_after-title">
+
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">所属分类</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker range="{{navItems}}" range-key="{{'name'}}" value="{{index}}" bindchange="bindTypeChange">
+            <view class="weui-select">
+              {{navItems[index].name}}
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">账号描述</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value="{{description}}" bindinput="setDescription"/>
+        </view>
+        <view wx:if="{{description.length > 0}}" class="weui-cell__ft">
+          <icon type="clear" bindtap="clearDescription"/> 
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input  {{account_isNull ? 'weui-cell_warn' : ''}}">
+        <view class="weui-cell__hd">
+          <view class="weui-label">账号</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value="{{account}}" bindinput="setAccount" />
+        </view>
+        <view class="weui-cell__ft">
+          <icon wx:if="{{account_isNull}}" type="warn" size="23" color="#E64340"></icon>
+          <icon wx:if="{{account.length > 0}}" type="clear" bindtap="clearAccount"/> 
+        </view>
+      </view>
+
+      <!-- 生成密码-->
+      <view class="weui-cell weui-cell_switch">
+        <view class="weui-cell__bd">生成密码</view>
+        <view class="weui-cell__ft">
+          <switch bindchange="switchChange" checked="{{hasCreate}}"/>
+        </view>
+      </view>
+      
+
+      <view wx:if="{{hasCreate}}">
+        <view >使用字符
+          <checkbox-group bindchange="checkboxChange">
+            <!--这里用label显示内容，for循环写法 wx:for-items 默认item为每一项-->
+            <label style="display: flex;" wx:for-items="{{items}}">
+                <!--value值和默认选中状态都是通过数据绑定在js中的-->
+                <checkbox value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
+            </label>
+          </checkbox-group>
+        </view>
+
+        <view >密码长度
+          <input class="weui-input" type="number" name="ps_len" value="{{ps_len}}" bindinput="setPs_len" />      
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input {{password_isNull ? 'weui-cell_warn' : ''}}">
+        <view class="weui-cell__hd">
+          <view class="weui-label">密码</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value="{{password}}" bindinput="setPassword" />
+        </view>
+        <view class="weui-cell__ft">
+          <icon wx:if="{{password_isNull}}" type="warn" size="23" color="#E64340"></icon>
+          <icon wx:if="{{password.length > 0}}" type="clear" bindtap="clearPassword"/> 
+          <button wx:if="{{hasCreate}}" class="weui-vcode-btn" size="mini" bindtap="onRefresh">换一个</button>
+        </view>
+      </view>
+
+      <!-- 有效期限-->
+      <view class="weui-cell weui-cell_switch">
+        <view class="weui-cell__bd">有效期限</view>
+        <view class="weui-cell__ft">
+          <switch bindchange="switchChange2" checked="{{hasTime}}"/>
+        </view>
+      </view>
+      
+      <view wx:if="{{hasTime}}" class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">日期选择</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker mode="date" value="{{valid_time}}" start="2015-09-01" end="2027-09-01" bindchange="bindDateChange">
+            <view class="weui-input">
+              {{date}}
+            </view>
+          </picker>
+        </view>
+      </view>
+    
+    </view>
+    <view class="weui-cells__tips my_remark">注：这里保存的密码只是保存在小程序缓存中，不与服务器交互，请放心使用，同时也请妥善保管！</view>
+
+    <view class="my_bottom">
+      <button formType="reset">重置</button>
+      <button formType="submit" type="primary">提交</button>
+    </view>
+  </form>
+
+  <view class="weui-footer weui-footer_fixed-bottom">
+    <view class="weui-footer__text">Copyright © 2008-2016 灬V灬</view>
+  </view>
+</view>

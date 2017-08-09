@@ -7,5 +7,7 @@
   <view class="userinfo">
     <image class="userinfo-avatar" src="../../../images/about/my.png" background-size="cover"/>
   </view>
-  
+  <view class="weui-footer weui-footer_fixed-bottom">
+    <view class="weui-footer__text">Copyright © 2008-2016 灬V灬</view>
+  </view>
 </view>

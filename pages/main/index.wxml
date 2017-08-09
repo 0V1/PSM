@@ -1,0 +1,38 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-search-bar">
+        <view class="weui-search-bar__form">
+            <view class="weui-search-bar__box">
+                <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                <input type="text" class="weui-search-bar__input" placeholder="搜索分类、描述、账号、密码" value="{{search_str}}" bindinput="setQueryInput" />
+                <view class="weui-icon-clear" wx:if="{{search_str.length > 0}}" bindtap="cleanQueryInput">
+                    <icon type="clear" size="14"/>
+                </view>
+            </view>
+            
+        </view>
+        <view class="weui-search-bar__cancel-btn" bindtap="onSearch">查询</view>
+    </view>
+
+    <!-- 分类导航 -->
+    <view class="weui-grids">
+      <block wx:for="{{navItems}}" wx:key="id"> 
+        <view id="{{index}}" class="weui-grid" bindtap="onTap" bindlongtap="onDelete" bindtouchstart="startTime" bindtouchend="endTime">
+            <image wx:if="{{index!=(navItems.length-1)}}" class="my_weui-grid__icon" src="../../images/main/Category.png" background-size="cover"/>
+            <image wx:if="{{index==(navItems.length-1)}}" class="my_weui-grid__icon" src="../../images/main/add.png" background-size="cover"/>
+            <view class="weui-grid__label">{{item.name}}</view>
+        </view>
+
+      </block>
+    </view>
+
+    <modal hidden="{{hidden_Add_Type}}" title="增加分类" confirm-text="增加" cancel-text="取消" bindcancel="onCancel" bindconfirm="onCreate">
+      <input type="text" auto-focus value='{{add_Type_Name}}' bindinput="setAddTypeName" placeholder="请输入分类名称"/>
+    </modal>
+  </view>
+
+  <view class="weui-footer weui-footer_fixed-bottom">
+    <view class="weui-footer__text">Copyright © 2008-2016 灬V灬</view>
+  </view>
+  
+</view>

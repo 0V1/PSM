@@ -7,8 +7,7 @@ App({
     wx.setStorageSync('logs', logs)
 
     //初始化分类列表
-    var navItems = wx.getStorageSync('navItems') || this.init_navItems;
-    wx.setStorageSync('navItems', navItems);
+    this.initNavItems();
   },
 
   getUserInfo: function(cb) {
@@ -41,11 +40,11 @@ App({
     }
   ],
   /**
-   * 获取分类列表
+   * 初始化分类列表（必须）
    */
-  getNavItems: function () {
+  initNavItems: function () {
     var navItems = wx.getStorageSync('navItems') || this.init_navItems;
-    return navItems;
+    wx.setStorageSync('navItems', navItems);
   },
   /**
    * 获取分类列表

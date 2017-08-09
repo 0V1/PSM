@@ -23,5 +23,6 @@
         <button id="{{index}}" class="account-right" bindtap="copy_password" size="mini">copy</button>
       </view>
     </view>
+    
       
 </view>

@@ -1,4 +1,5 @@
-// index.js
+//获取应用实例
+var app = getApp();
 Page({
 
   /**
@@ -56,23 +57,25 @@ Page({
     this.data.content_import = e.detail.value;    
   },
   /**
-   * 【操作说明】
-   */
-  operation: function () {
-    wx.navigateTo({
-      url: 'operation/index'
-    })
-  },
-  /**
    * 【清空缓存】
    */
   clear: function () {
-    wx.clearStorageSync();
-    wx.showToast({
-      title: "清空成功",
-      icon: "success",
-      duration: 1500
-    });
+    wx.showModal({
+      title: '确认清空缓存',
+      content: '缓存清空将不可恢复，请慎重操作。',
+      success: function (res) {
+        if (res.confirm) {
+          wx.clearStorageSync();
+          //初始化分类列表
+          app.initNavItems();
+          wx.showToast({
+            title: "清空成功",
+            icon: "success",
+            duration: 1500
+          });
+        }
+      }
+    })
   },
   /**
    * 【导出】
@@ -98,15 +101,6 @@ Page({
       hidden_import: false
     })
   },
-  /**
-   * 【关于】
-   */
-  about: function () {
-    wx.navigateTo({
-      url: 'about/index'
-    })
-  },
-
   /**
    * 生命周期函数--监听页面加载
    */

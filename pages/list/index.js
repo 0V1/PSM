@@ -5,14 +5,15 @@ Page({
   data: {
     reminder: "还没有需要管理的密码，添加一个吧！",
     keyChains: [],
-    hasObject:true
+    hasObject:true,
+    //跳转过来的参数
+    options: {}
   },
   onLoad: function (options) {
     console.info("main.onLoad");
     wx.removeStorageSync("keyChains_");
     var index = options.index;
     var search = options.search;
-    console.info(options)
     var keyChains_ = wx.getStorageSync("keyChains");
     //根据类型跳转过来
     if(index){
@@ -20,8 +21,7 @@ Page({
       var type_name = navItems[index].name;
       console.info(type_name)
     
-      if ('全部' === type_name) {}
-      else{
+      if ('全部' !== type_name) {
         for (var key in keyChains_) {
           if (type_name !== keyChains_[key].type) {
             delete keyChains_[key];
@@ -30,14 +30,10 @@ Page({
       }
       //更新数据
       wx.setStorageSync("keyChains_", keyChains_);
-      this.setData({
-        keyChains: wx.getStorageSync("keyChains_"),
-        hasObject: util.isEmptyObject(keyChains_)
-      })
     }
+
     //根据搜索条件跳转过来
     if(search){
-      console.info(search);
       var keyChains_search = {};
       for (var key in keyChains_) {
         var object2str = keyChains_[key].type + "" + keyChains_[key].description + "" + keyChains_[key].account + "" + keyChains_[key].password;
@@ -48,11 +44,13 @@ Page({
       }
       //更新数据
       wx.setStorageSync("keyChains_", keyChains_search);
-      this.setData({
-        keyChains: wx.getStorageSync("keyChains_"),
-        hasObject: util.isEmptyObject(keyChains_search)
-      })
     }
+
+    this.setData({
+      options: options,
+      keyChains: wx.getStorageSync("keyChains_"),
+      hasObject: util.isEmptyObject(wx.getStorageSync("keyChains_"))
+    })
   },
   /**
   * 生命周期函数--监听页面显示
@@ -60,9 +58,7 @@ Page({
   onShow: function () {
     console.info("main.onShow");
     //更新数据
-    this.setData({
-      "keyChains": wx.getStorageSync("keyChains_")
-    })
+    this.onLoad(this.data.options);
   },
   /**
    * 维护数据
