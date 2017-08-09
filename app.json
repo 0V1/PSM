@@ -1,9 +1,10 @@
 {
   "pages": [
-    "pages/main/main",
-    "pages/add/add",
+    "pages/lock/index",
+    "pages/main/index",
+    "pages/add/index",
     "pages/list/index",
-    "pages/update/update",
+    "pages/update/index",
     "pages/mySet/index",
     "pages/mySet/operation/index",
     "pages/mySet/about/index"
@@ -21,13 +22,13 @@
     "backgroundColor": "#f2f2f2",
     "list": [
       {
-        "pagePath": "pages/main/main",
+        "pagePath": "pages/main/index",
         "iconPath": "images/footer/index.png",
         "selectedIconPath": "images/footer/indexS.png",
         "text": "首页"
       },
       {
-        "pagePath": "pages/add/add",
+        "pagePath": "pages/add/index",
         "iconPath": "images/footer/logs.png",
         "selectedIconPath": "images/footer/logsS.png",
         "text": "添加"

@@ -71,7 +71,7 @@ Page({
     var id = e.currentTarget.id;
 
     wx.navigateTo({
-      url: '../update/update?id=' + id
+      url: '../update/index?id=' + id
     })
   },
   /**
@@ -131,12 +131,6 @@ Page({
           duration: 700
         })
       }
-    })
-  },
-  //【生成密码】事件处理函数
-  autoCreate: function () {
-    wx.navigateTo({
-      url: '../autoCreate/autoCreate'
     })
   },
 })
