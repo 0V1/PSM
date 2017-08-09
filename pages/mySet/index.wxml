@@ -32,14 +32,18 @@
       <input value='{{content_import}}' bindinput="setImport" placeholder="请输入要导入的内容"/>
       <text>
         格式：
-        {"1501729257234":
-        {"description":"1", 
-        "account":"2", 
-        "password":"3", 
-        "create_time":"2017-08-03 11:00:57", 
-        "update_time":"2017-08-03 11:00:57", 
-        "valid_time":"", 
-        "state":1}}
+        {"唯一id值":
+          {
+          "type":"分类名称",
+          "description":"账号描述", 
+          "account":"账号", 
+          "password":"密码", 
+          "create_time":"创建时间(例2017-08-03 11:00:57)", 
+          "update_time":"更新时间(例2017-08-03 11:00:57)", 
+          "valid_time":"有效时间(例2017-08-03 11:00:57)", 
+          "state":1
+          }
+        }
       </text>
   </modal>
 

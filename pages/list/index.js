@@ -12,12 +12,13 @@ Page({
     wx.removeStorageSync("keyChains_");
     var index = options.index;
     var search = options.search;
-
+    console.info(options)
     var keyChains_ = wx.getStorageSync("keyChains");
     //根据类型跳转过来
     if(index){
       var navItems = wx.getStorageSync('navItems');
       var type_name = navItems[index].name;
+      console.info(type_name)
     
       if ('全部' === type_name) {}
       else{

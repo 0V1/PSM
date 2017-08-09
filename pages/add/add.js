@@ -8,6 +8,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    //提交时账号密码不能为空的验证字段
+    account_isNull: false,
+    password_isNull: false,
     //所属类型
     index:0,
     type_name:'',
@@ -69,13 +72,24 @@ Page({
    * 保存数据事件
    */
   formSubmit: function (event) {
+    var account_ = this.data.account;
+    var password_ = this.data.password;
+    //验证账号密码必输
+    if (!(account_ && password_)){
+      this.setData({
+        account_isNull: true,
+        password_isNull: true,
+      })
+      return; 
+    }
+
     var id = (new Date().getTime());
     var keyChains = wx.getStorageSync('keyChains') || {};
     keyChains[id] = {
       type: this.data.type_name,
-      description: event.detail.value.description,
-      account: event.detail.value.account,
-      password: event.detail.value.password,
+      description: this.data.description,
+      account: account_,
+      password: password_,
       create_time: util.formatTime(new Date()),
       update_time: util.formatTime(new Date()),
       valid_time: this.data.valid_time,
@@ -114,7 +128,7 @@ Page({
   bindTypeChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     var index = e.detail.value;
-    var navItems = app.getNavItems();
+    var navItems = this.data.navItems;
     
     this.setData({
       index : e.detail.value,
@@ -204,21 +218,33 @@ Page({
     });
   },
   //set值
-  setDescription: function (e) {
-    this.data.description = e.detail.value;    
+  setDescription: function (e) { 
+    this.setData({
+      description: e.detail.value
+    });  
   },
   setAccount: function (e) {
-    this.data.account = e.detail.value;
+    this.setData({
+      account : e.detail.value,
+      account_isNull: false,
+    });
   },
   setPassword: function (e) {
-    this.data.password = e.detail.value;
+    this.setData({
+      password: e.detail.value,
+      password_isNull: false,
+    });
   },
   setEncryption: function (e) {
-    this.data.encryption = e.detail.value;
+    this.setData({
+      encryption: e.detail.value
+    });
   },
   setPs_len: function (e) {
-    this.data.ps_len = e.detail.value
-    console.info(this.data.ps_len)
+    this.setData({
+      ps_len: e.detail.value
+    });
+    
     this.createPassword();
   },
   //清除值
@@ -241,15 +267,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var navItems = app.getNavItems();
-    console.info(app.getNavItems());
+    var navItems_ = wx.getStorageSync('navItems');
+    navItems_.splice(navItems_.length-1, 1);
     this.setData({
-      navItems: navItems
+      'navItems': navItems_
     })
-    this.data.navItems.splice(navItems.length-1, 1);
+    // this.data.navItems.splice(this.data.navItems.length-1, 1);
     
-    console.info(app.getNavItems());
-    console.info(app.init_navItems);
+    console.info(this.data.navItems);
     
     this.init_page();
   },

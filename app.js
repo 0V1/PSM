@@ -5,6 +5,10 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
+
+    //初始化分类列表
+    var navItems = wx.getStorageSync('navItems') || this.init_navItems;
+    wx.setStorageSync('navItems', navItems);
   },
 
   getUserInfo: function(cb) {

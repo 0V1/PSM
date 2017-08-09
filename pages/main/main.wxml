@@ -1,15 +1,19 @@
 <view class="page">
   <view class="page__bd">
-    <view class="search-bar">
-      <view class="search-bar-input-container">
-        <input bindconfirm="searchBarInputConfirm" bindinput="setQueryInput" value="{{search_str}}" class="search-bar-input" placeholder="分类、描述、账号、密码" confirm-type="search"/>
-        <icon type="search" size="19" color="#000000" bindtap="onSearch"/>
-      </view>
-      <view class="searchBarCancelButton">
-        <button size="mini" bindtap="onSearch">查询</button>
-      </view>
+    <view class="weui-search-bar">
+        <view class="weui-search-bar__form">
+            <view class="weui-search-bar__box">
+                <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                <input type="text" class="weui-search-bar__input" placeholder="搜索分类、描述、账号、密码" value="{{search_str}}" bindinput="setQueryInput" />
+                <view class="weui-icon-clear" wx:if="{{search_str.length > 0}}" bindtap="cleanQueryInput">
+                    <icon type="clear" size="14"/>
+                </view>
+            </view>
+            
+        </view>
+        <view class="weui-search-bar__cancel-btn" bindtap="onSearch">查询</view>
     </view>
- 
+
     <!-- 分类导航 -->
     <view class="wrap">
       <block wx:for="{{navItems}}" wx:key="id" id="{{index}}"> 

@@ -21,7 +21,7 @@ Page({
     console.info("main.onLoad");
     //更新数据
     this.setData({
-      navItems: app.getNavItems()
+      navItems: wx.getStorageSync('navItems')
     })
   },
   /**
@@ -31,7 +31,7 @@ Page({
     console.info("main.onShow");
     this.setData({
       search_str: '',
-      navItems: app.getNavItems()
+      navItems: wx.getStorageSync('navItems')
     })
   },
   /**
@@ -59,7 +59,7 @@ Page({
    */
   goToList: function (e) {
     var index = e.currentTarget.id;
-    var navItems = app.getNavItems();
+    var navItems = wx.getStorageSync('navItems');
     console.info(navItems[index]);
     if (index != (navItems.length-1)){
       wx.navigateTo({
@@ -84,7 +84,7 @@ Page({
    * 增加分类
    */
   onCreate: function () {
-    var navItems = app.getNavItems();
+    var navItems = wx.getStorageSync('navItems');
     for (var i = 0; i < navItems.length; i++) {
       console.info(this.data.add_Type_Name);
       console.info(navItems[i].name);
@@ -164,6 +164,16 @@ Page({
     this.data.add_Type_Name = e.detail.value;
   },
   setQueryInput: function (e) {
-    this.data.search_str = e.detail.value;
+    this.setData({
+      search_str : e.detail.value
+    })
+  },
+  /**
+   * 清除值
+   */
+  cleanQueryInput: function (e) {
+    this.setData({
+      search_str: ''
+    })
   }
 })
