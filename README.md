@@ -11,7 +11,7 @@
     
 应用推广：
 -----------------------------
-![github-05.jpg](/images/eg/小程序码.png "github-05.jpg") ![github-06.jpg](/images/eg/二维码.png "github-06.jpg")
+![github-05.jpg](/images/eg/小程序码.jpg "github-05.jpg") ![github-06.jpg](/images/eg/二维码.jpg "github-06.jpg")
 
 
 应用截图：
