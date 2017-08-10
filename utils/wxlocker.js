@@ -124,11 +124,19 @@
                     this.pswObj.step = 2;
                     this.pswObj.spassword = psw;
                     this.resetHidden = false;
-                    this.title = "密码保存成功，请绘制以开启应用";
+                    this.title = "密码保存成功";
                     this.titleColor = "succ";
                     this.drawStatusPoint('#09bb07');
                     wx.setStorageSync('passwordxx', JSON.stringify(this.pswObj.spassword));
                     // wx.setStorageSync('chooseType', this.chooseType);
+                    wx.showLoading({
+                      title: '加载中',
+                    })
+
+                    setTimeout(function () {
+                      wx.hideLoading();
+                      cb();
+                    }, 2000)
                 } else {
                     this.title = "两次绘制不一致，重新绘制";
                     this.titleColor = "error";

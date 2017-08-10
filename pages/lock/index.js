@@ -40,14 +40,28 @@ Page({
       titleColor:titleColor
     });
   },
+  /**
+   * 手势开始触发
+   * 一次
+   */
   touchS:function(e){//touchstart事件绑定
+    // console.info('S');
     wxlocker.lock.bindtouchstart(e);
   },
+  /**
+   * 手势移动触发
+   * 多次
+   */
   touchM:function(e){//touchmove事件绑定
+    // console.info('M');
     wxlocker.lock.bindtouchmove(e);
-    
   },
+  /**
+   * 手势结束触发
+   * 一次
+   */
   touchE:function(e){//touchend事件绑定
+    // console.info('E');
     wxlocker.lock.bindtouchend(e,this.lockSucc);
     this.initState();
   },
