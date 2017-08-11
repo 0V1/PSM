@@ -86,6 +86,13 @@ Page({
    * 增加分类
    */
   onCreate: function () {
+
+    //输入内容为空，则退出
+    if (this.data.add_Type_Name.length === 0) {
+      this.onCancel();
+      return;
+    }
+    
     var navItems = wx.getStorageSync('navItems');
     for (var i = 0; i < navItems.length; i++) {
       console.info(this.data.add_Type_Name);

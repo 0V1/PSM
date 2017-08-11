@@ -55,6 +55,8 @@ Page({
    */
   init_page: function(){
     this.setData({
+      account_isNull: false,
+      password_isNull: false,
       index: 0,
       type_name: '全部',
       description: '',
@@ -74,11 +76,13 @@ Page({
   formSubmit: function (event) {
     var account_ = this.data.account;
     var password_ = this.data.password;
+    console.info(account_);
+    console.info(password_);
     //验证账号密码必输
-    if (!(account_ && password_)){
+    if (account_.length === 0 || password_.length === 0){
       this.setData({
-        account_isNull: true,
-        password_isNull: true,
+        account_isNull: account_.length === 0?true:false,
+        password_isNull: password_.length === 0?true:false,
       })
       return; 
     }
@@ -214,7 +218,8 @@ Page({
     }
     //更新密码
     this.setData({
-      password: this.data.password
+      password: this.data.password,
+      password_isNull: false,
     });
   },
   //set值
